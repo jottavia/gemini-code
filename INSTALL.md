@@ -1,6 +1,6 @@
 # Installing and Using Gemini Code
 
-This guide explains how to install, configure, and use Gemini Code.
+This guide explains how to install, configure, and use Gemini Code, your AI assistant for system administration and software development.
 
 ## Installation Options
 
@@ -40,6 +40,8 @@ To get a Google API key for Gemini:
 3. Copy the key and use it in the setup command above
 
 Your API key is stored securely in `~/.config/gemini-code/config.yaml`.
+
+**For System Administration Tasks**: To use Gemini Code for system administration tasks that require root privileges (e.g., installing packages, modifying restricted system files), ensure that `sudo` is installed on your Linux/FreeBSD system and that the user running `gemini` is configured to use `sudo` (either via password prompt or passwordless configuration for `sudo -n`).
 
 ## Using Gemini Code
 

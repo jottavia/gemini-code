@@ -2,7 +2,6 @@
 Base tool implementation and interfaces.
 """
 
-import shlex
 import inspect
 from abc import ABC, abstractmethod
 from google.generativeai.types import FunctionDeclaration

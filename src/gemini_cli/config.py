@@ -5,6 +5,9 @@ Configuration management for Gemini CLI.
 import os
 import yaml
 from pathlib import Path
+import logging
+
+log = logging.getLogger(__name__)
 
 class Config:
     """Manages configuration for the Gemini CLI application."""
@@ -36,8 +39,12 @@ class Config:
     
     def _load_config(self):
         """Load configuration from file."""
-        with open(self.config_file, 'r') as f:
-            return yaml.safe_load(f)
+        try:
+            with open(self.config_file, 'r') as f:
+                return yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            log.error(f"Error parsing configuration file at {self.config_file}: Possible corruption. Details: {e}")
+            raise
     
     def _save_config(self):
         """Save configuration to file."""

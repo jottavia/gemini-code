@@ -18,7 +18,6 @@ from ..utils import count_tokens
 from ..tools import get_tool, AVAILABLE_TOOLS
 
 # Setup logging (basic config, consider moving to main.py)
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s')
 log = logging.getLogger(__name__)
 
 MAX_AGENT_ITERATIONS = 10
@@ -489,8 +488,7 @@ class GeminiModel:
         tool_list_str = "\n".join(tool_descriptions)
 
         # Prompt v13.1 - Native Functions, Planning, Accurate Context
-        return f"""You are Gemini Code, an AI coding assistant running in a CLI environment.
-Your goal is to help the user with their coding tasks by understanding their request, planning the necessary steps, and using the available tools via **native function calls**.
+        return f"""You are Gemini Code, an AI system administration assistant. Your primary goal is to help the user manage and administer Linux and FreeBSD systems by understanding their requests, planning necessary steps, and using the available tools via native function calls.
 
 Available Tools (Use ONLY these via function calls):
 {tool_list_str}
@@ -515,6 +513,7 @@ Important Rules:
     *   **Proactive Assistance:** When providing instructions that culminate in a specific execution command (like `python file.py`, `npm start`, `git status | cat`, etc.), first give the full explanation, then **explicitly ask the user if they want you to run that final command** using the `execute_command` tool. 
         *   Example: After explaining how to run `calculator.py`, you should ask: "Would you like me to run `python calculator.py | cat` for you using the `execute_command` tool?" (Append `| cat` for commands that might page).
     *   Do *not* use `task_complete` just for providing information; only use it when the *underlying task* (e.g., file creation, modification) is fully finished.
+*   **Root Privileges (`sudo`):** The `bash` tool has a `use_sudo: bool` parameter (default is `False`). If you determine a command requires root privileges (e.g., for package installation, service management, modifying restricted files), you **MUST** use `bash(command='your_command', use_sudo=True)`. When you create a plan that includes such a command, you **MUST** clearly state that the step will use root privileges. For example: "1. Install 'htop' package using `apt-get install htop` (requires root privileges)." The user is responsible for ensuring `sudo` is configured; if `sudo -n` (non-interactive) fails due to password requirement, the tool will report an error.
 *   **Planning First:** For tasks requiring multiple steps (e.g., read file, modify content, write file), explain your plan briefly in text *before* the first function call.
 *   **Precise Edits:** When editing files (`edit` tool), prefer viewing the relevant section first (`view` tool with offset/limit), then use exact `old_string`/`new_string` arguments if possible. Only use the `content` argument for creating new files or complete overwrites.
 *   **Task Completion Signal:** ALWAYS finish action-oriented tasks by calling `task_complete(summary=...)`. 
@@ -524,20 +523,6 @@ Important Rules:
 
 The user's first message will contain initial directory context and their request."""
 
-    # --- Text Extraction Helper (if needed for final output) ---
-    def _extract_text_from_response(self, response) -> str | None:
-         """Safely extracts text from a Gemini response object."""
-         try:
-             if response and response.candidates:
-                 # Handle potential multi-part responses if ever needed, for now assume text is in the first part
-                 if response.candidates[0].content and response.candidates[0].content.parts:
-                     text_parts = [part.text for part in response.candidates[0].content.parts if hasattr(part, 'text')]
-                     return "\n".join(text_parts).strip() if text_parts else None
-             return None
-         except (AttributeError, IndexError) as e:
-             log.warning(f"Could not extract text from response: {e} - Response: {response}")
-             return None
-             
     # --- Find Last Text Helper ---
     def _find_last_model_text(self, history: list) -> str:
         """Finds the last text part sent by the model in the history."""
