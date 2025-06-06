@@ -22,12 +22,14 @@
 *   **Project Roadmap Creation**: This `PROJECT_ROADMAP.md` file established. (Current task)
 *   `PROJECT_ROADMAP.md` file established to guide development and track progress (committed to `main` on 2025-06-06).
 
+*   Reviewed and re-prioritized project short-term goals with user (2025-06-06).
+
 ## 3. Current Development Focus / Short-Term Goals
 
-*   **Actively use and maintain `PROJECT_ROADMAP.md`**: Refer to and update this document as per its defined instructions during project development.
 *   **Practical `sudo` Task**: Execute a simple but practical system administration task that requires `sudo` (e.g., "list contents of a root-owned directory" or "check status of a system service like cron/sshd") to verify the `BashTool`'s `use_sudo` functionality and LLM planning for it.
 *   **Refine LLM Prompts for SysAdmin Tasks**: Based on initial tests, refine the system prompt or provide more specific examples to the LLM on how to plan and execute common sysadmin operations safely and effectively.
 *   **Basic Monitoring Example**: Attempt a basic system monitoring task (e.g., "Show me current disk usage" or "List top 5 CPU consuming processes").
+*   **Actively use and maintain `PROJECT_ROADMAP.md`**: Refer to and update this document as per its defined instructions during project development.
 
 ## 4. Long-Term Vision & Future Goals
 
@@ -61,4 +63,5 @@
 *   **Log Changes Systematically**: When this file is updated, the commit message should clearly indicate that the Project Roadmap has been modified.
 
 ---
+
 *This document was last updated by Jules on: 2025-06-06.*
