@@ -3,7 +3,6 @@ Utility functions for the Gemini CLI tool.
 """
 
 import tiktoken
-import json
 
 def count_tokens(text):
     """
