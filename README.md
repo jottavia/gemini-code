@@ -1,20 +1,28 @@
-# Gemini Code
+# Gemini Code: AI SysAdmin & Coding Assistant
 
-A powerful AI coding assistant for your terminal, powered by Gemini 2.5 Pro with support for other LLM models.
-More information [here](https://blossom-tarsier-434.notion.site/Gemini-Code-1c6c13716ff180db86a0c7f4b2da13ab?pvs=4)
+A powerful AI assistant for your terminal, designed to help with both system administration tasks on Linux/FreeBSD and software development. Powered by Google's Gemini models, it can execute commands (with `sudo` if needed), manage files, assist with coding, and more.
 
 ## Features
 
-- Interactive chat sessions in your terminal
-- Multiple model support (Gemini 2.5 Pro, Gemini 1.5 Pro, and more)
-- Basic history management (prevents excessive length)
-- Markdown rendering in the terminal
-- Automatic tool usage by the assistant:
-  - File operations (view, edit, list, grep, glob)
-  - Directory operations (ls, tree, create_directory)
-  - System commands (bash)
-  - Quality checks (linting, formatting)
-  - Test running capabilities (pytest, etc.)
+### System Administration (Linux/FreeBSD):
+- Execute shell commands with natural language.
+- Perform privileged operations using `sudo` (requires user pre-configuration).
+- Manage files, directories, and configurations.
+- Assistance with common system administration tasks.
+
+### Coding Assistance:
+- Interactive chat sessions for coding queries.
+- Code generation, explanation, and debugging.
+- Automatic use of tools for file operations (view, edit, list, grep, glob).
+- Directory navigation and structure viewing (ls, tree).
+- Code quality checks (linting, formatting).
+- Test execution integration (e.g., pytest).
+
+### General:
+- Multiple model support (Gemini 2.5 Pro, Gemini 1.5 Pro, etc.).
+- Basic conversation history management.
+- Markdown rendering for clear output.
+- Automatic tool usage by the assistant for a wide range of tasks.
 
 ## Installation
 
@@ -75,14 +83,20 @@ During an interactive session, you can use these commands:
 Unlike direct command-line tools, the Gemini CLI's tools are used automatically by the assistant to help answer your questions. For example:
 
 1. You ask: "What files are in the current directory?"
-2. The assistant uses the `ls` tool behind the scenes
-3. The assistant provides you with a formatted response
+2. The assistant uses the `ls` tool behind the scenes.
+3. The assistant provides you with a formatted response.
 
-This approach makes the interaction more natural and similar to how Claude Code works.
+This approach makes the interaction more natural.
+
+Similarly, for a sysadmin task:
+1. You ask: 'Install the htop package.'
+2. The assistant plans to use `bash` with `sudo apt-get install htop` (or similar for other OS).
+3. After you approve the plan, the assistant executes the command.
+4. You are informed of the outcome.
 
 ## Development
 
-This project is under active development. More models and features will be added soon!
+This project is under active development, continually enhancing its capabilities as both an AI System Administrator and a Coding Assistant. Future goals include advanced system monitoring, automated maintenance routines, and deeper integration with development workflows.
 
 ### Recent Changes in v0.1.69
 
